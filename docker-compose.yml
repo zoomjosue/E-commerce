@@ -1,20 +1,28 @@
 services:
   db:
-    image: mariadb:11
-    container_name: tienda_db
-    restart: unless-stopped
-    environment:
-      MARIADB_ROOT_PASSWORD: rootsecret
-      MARIADB_DATABASE: tienda_deportes
-      MARIADB_USER: proy2
-      MARIADB_PASSWORD: secret
+  image: mariadb:11
+  container_name: tienda_db
+  restart: unless-stopped
 
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+  environment:
+    MARIADB_ROOT_PASSWORD: rootsecret
+    MARIADB_DATABASE: tienda_deportes
+    MARIADB_USER: proy2
+    MARIADB_PASSWORD: secret
 
-    ports:
-      - "3307:3306"
+  volumes:
+    - db_data:/var/lib/mysql
+    - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+
+  ports:
+    - "3307:3306"
+
+  healthcheck:
+    test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+    interval: 10s
+    timeout: 5s
+    retries: 10
+    start_period: 30s
 
   backend:
     build:
