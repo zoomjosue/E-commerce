@@ -1,7 +1,7 @@
 services:
   # Base de datos
   db:
-    image: mariadb:11
+    image: mariadb:10.11
     container_name: tienda_db
     restart: unless-stopped
 
@@ -19,7 +19,7 @@ services:
       - "3307:3306"
 
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-uroot", "-prootsecret"]
       interval: 10s
       timeout: 5s
       retries: 10
