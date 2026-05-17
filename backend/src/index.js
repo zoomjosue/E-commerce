@@ -17,12 +17,10 @@ app.use('/api', routes);
 
 app.get('/health', (_, res) => {
   res.json({
-    status: 'ok',
-    environment: process.env.NODE_ENV || 'development'
+    status: 'ok'
   });
 });
 
-// Manejador global de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
 
@@ -36,7 +34,6 @@ app.listen(PORT, async () => {
 
   try {
     await seedAdmin();
-    console.log('Admin verificado');
   } catch (e) {
     console.warn('Seed admin postponed:', e.message);
   }
