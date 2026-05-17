@@ -18,7 +18,7 @@ function getById(req, res) {
   return run(res, () => VentaService.getById(req.params.id));
 }
 
-function create(req, res) {
+function create(req, res) { 
   return run(res, () => VentaService.create(req.body), 201);
 }
 
