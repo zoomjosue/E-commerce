@@ -2,6 +2,8 @@
 
 Aplicación web fullstack para gestionar el inventario y las ventas de una tienda deportiva. Incluye frontend en React, API REST con Node.js/Express, base de datos MariaDB y despliegue completo con Docker Compose.
 
+Link para verlo deployado: http://209.126.125.149:5174/login
+
 ---
 
 ## Requisitos previos
